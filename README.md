@@ -1,4 +1,4 @@
-# Hi there! 👋 I'm Evgenii
+# Hi there! 👋 I'm Evgeniu
 
 <div align="center">
   <a href="https://github.com/SteppingCode">
