@@ -32,15 +32,6 @@ I'm a passionate full-stack developer with a deep interest in building scalable,
 
 ---
 
-## 💼 What I'm Working On
-
-- 🔨 Building robust backend systems with FastAPI
-- 🎨 Creating responsive, user-friendly interfaces
-- 📖 Contributing to open-source projects
-- 🧠 Deepening knowledge of software architecture and design patterns
-
----
-
 ## 🤝 Let's Connect!
 
 <div align="center">
