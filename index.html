@@ -5,265 +5,798 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evgeniu | About</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0d1117;
-            --text-color: #c9d1d9;
-            --heading-color: #ffffff;
-            --link-color: #58a6ff;
-            --border-color: #30363d;
-            --card-bg: #161b22;
+            --bg-main: #0B0F19;
+            --bg-card: #151C2C;
+            --bg-card-hover: #1C2438;
+            --text-main: #94A3B8;
+            --text-heading: #F8FAFC;
+            --accent-primary: #38BDF8;
+            --accent-secondary: #818CF8;
+            --border-color: #1E293B;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            max-width: 850px;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 900px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 3rem 1.5rem;
         }
 
         h1, h2, h3 {
-            color: var(--heading-color);
+            color: var(--text-heading);
+            font-weight: 700;
         }
 
         h2 {
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 0.3em;
-            margin-top: 2em;
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        h2::after {
+            content: "";
+            height: 1px;
+            flex-grow: 1;
+            background: linear-gradient(90deg, var(--border-color), transparent);
+            margin-left: 1rem;
         }
 
         a {
-            color: var(--link-color);
+            color: var(--accent-primary);
             text-decoration: none;
+            transition: color 0.2s ease;
         }
 
         a:hover {
-            text-decoration: underline;
+            color: var(--accent-secondary);
         }
 
-        .center {
+        /* Hero Section */
+        .hero {
             text-align: center;
+            padding: 3rem 0 4rem;
+            animation: fadeIn 1s ease-out;
         }
 
-        hr {
-            border: 0;
-            height: 1px;
-            background: var(--border-color);
-            margin: 2rem 0;
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+	        color: transparent;
+	    
+            span {
+                color: initial;
+            }
         }
 
-        ul {
-            padding-left: 1.5em;
-        }
-
-        li {
-            margin-bottom: 0.5em;
-        }
-
-        .badges img, .stats img {
-            margin: 5px;
-            max-width: 100%;
-        }
-
-        .projects-grid {
+        .social-links {
             display: flex;
-            flex-direction: column;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links img {
+            transition: transform 0.2s;
+        }
+
+        .social-links a:hover img {
+            transform: translateY(-3px);
+        }
+
+        /* Section Layouts */
+        section {
+            margin-bottom: 4rem;
+            animation: slideUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        section:nth-child(2) { animation-delay: 0.1s; }
+        section:nth-child(3) { animation-delay: 0.2s; }
+        section:nth-child(4) { animation-delay: 0.3s; }
+        section:nth-child(5) { animation-delay: 0.4s; }
+
+        /* Grid for About */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .about-grid ul {
+            list-style: none;
+        }
+
+        .about-grid li {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        /* Tech Stack */
+        .tech-category {
+            margin-bottom: 1.5rem;
+        }
+        
+        .tech-category h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .badges img {
+            height: 28px;
+            border-radius: 4px;
+            transition: transform 0.2s;
+        }
+
+        .badges img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 1.5rem;
         }
 
         .project-card {
-            background-color: var(--card-bg);
+            background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 12px;
             padding: 1.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-secondary);
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
         }
 
         .project-card h3 {
-            margin-top: 0;
-            margin-bottom: 0.5rem;
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-heading);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .project-card p {
-            margin: 0.5rem 0;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
         }
 
-        pre {
-            background-color: var(--card-bg);
-            padding: 1rem;
+        .project-features {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .project-features ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .project-tech {
+            margin-top: auto;
+            padding-top: 1rem;
+            font-size: 0.85rem;
+            color: var(--accent-primary);
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Stats */
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .stats-container img {
+            max-width: 100%;
             border-radius: 8px;
             border: 1px solid var(--border-color);
+        }
+
+        /* Terminal Window */
+        .terminal {
+            background: #0D1117;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .terminal-header {
+            background: #161B22;
+            padding: 0.75rem 1rem;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background: #FF5F56; }
+        .dot-yellow { background: #FFBD2E; }
+        .dot-green { background: #27C93F; }
+
+        .terminal-body {
+            padding: 1.5rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.95rem;
+            color: #A5D6FF;
             overflow-x: auto;
-            font-family: "Fira Code", monospace;
+            line-height: 1.5;
+        }
+
+        .terminal-body span.dir { color: #7EE787; font-weight: 600; }
+        .terminal-body span.check { color: #3FB950; }
+        .terminal-body span.load { color: #D2A8FF; }
+        .terminal-body span.wait { color: #FF7B72; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 4rem;
+        }
+
+        .quote {
+            font-style: italic;
+            color: var(--text-main);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .lang-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .lang-btn {
+            background: #151C2C;
+            border: 1px solid #1E293B;
+            color: #38BDF8;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .lang-btn:hover { background: #1E293B; }
+        
+        /* Изначально скрываем английскую версию */
+        #content-en { display: none; }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
 
-    <h1 class="center">Hi there! 👋 I'm Evgeniu</h1>
-
-    <div class="center">
-        <a href="https://github.com/SteppingCode">
-            <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=0FF&width=435&lines=Full+Stack+Developer;Python+Enthusiast;Web+Application+Expert;Always+Learning+Something+New" alt="Typing SVG" />
-        </a>
+    <div class="lang-switcher">
+        <button class="lang-btn" onclick="toggleLang()">RU / EN</button>
     </div>
 
-    <hr>
+    <div class="container" id="content-en">
+        <header class="hero">
+            <h1>Hi there! <span>👋</span> I'm Evgeniu</h1>
+            <a href="https://github.com/SteppingCode">
+                <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=38BDF8&width=435&lines=Full+Stack+Developer;Python+Enthusiast;Web+Application+Expert;Always+Learning+Something+New" alt="Typing SVG" />
+            </a>
+            <div class="social-links">
+                <a href="https://github.com/SteppingCode" target="_blank">
+                    <img src="https://img.shields.io/badge/-GitHub-181717?style=for-the-badge&logo=github" alt="GitHub">
+                </a>
+                <a href="mailto:steppingcode.github@gmail.com">
+                    <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail">
+                </a>
+            </div>
+        </header>
 
-    <h2>💫 About Me</h2>
-    <p>I'm a passionate full-stack developer with a deep interest in building scalable, user-friendly web applications. I love turning ideas into reality through clean, efficient code and modern technologies.</p>
-    <ul>
-        <li>🎯 <strong>Currently focusing on</strong>: Web development with Python and JavaScript</li>
-        <li>🚀 <strong>Passionate about</strong>: Building intuitive user interfaces and robust backend systems</li>
-        <li>📚 <strong>Always learning</strong>: New frameworks, design patterns, and best practices</li>
-        <li>💬 <strong>Ask me about</strong>: Python, FastAPI, Web Development, Database Design</li>
-        <li>🌱 <strong>Growing expertise in</strong>: Full-stack development, system architecture, and user experience</li>
-    </ul>
+        <section>
+            <h2>💫 About Me</h2>
+            <div class="about-grid">
+                <p>I'm a passionate full-stack developer with a deep interest in building scalable, user-friendly web applications. I love turning ideas into reality through clean, efficient code and modern technologies.</p>
+                <ul>
+                    <li>🎯 <strong>Currently focusing on:</strong> Web development with Python and JavaScript</li>
+                    <li>🚀 <strong>Passionate about:</strong> Building intuitive user interfaces and robust backend systems</li>
+                    <li>📚 <strong>Always learning:</strong> New frameworks, design patterns, and best practices</li>
+                    <li>💬 <strong>Ask me about:</strong> Python, FastAPI, Web Development, Database Design</li>
+                    <li>🌱 <strong>Growing expertise in:</strong> Full-stack development, system architecture, and user experience</li>
+                </ul>
+            </div>
+        </section>
 
-    <hr>
+        <section>
+            <h2>🛠️ Tech Stack</h2>
+            
+            <div class="tech-category">
+                <h3>Languages</h3>
+                <div class="badges">
+                    <img src="https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python">
+                    <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=000" alt="JavaScript">
+                    <img src="https://img.shields.io/badge/-SQL-336791?style=flat-square&logo=postgresql&logoColor=white" alt="SQL">
+                    <img src="https://img.shields.io/badge/HTML-%23E34F26.svg?style=flat-square&logo=html5&logoColor=white" alt="HTML">
+                    <img src="https://img.shields.io/badge/CSS-639?style=flat-square&logo=css&logoColor=fff" alt="CSS">
+                    <img src="https://img.shields.io/badge/C++-%2300599C.svg?style=flat-square&logo=c%2B%2B&logoColor=white" alt="C++">
+                </div>
+            </div>
 
-    <h2>🛠️ Tech Stack</h2>
+            <div class="tech-category">
+                <h3>Backend & Frameworks</h3>
+                <div class="badges">
+                    <img src="https://img.shields.io/badge/FastAPI-009485.svg?style=flat-square&logo=fastapi&logoColor=white" alt="FastAPI">
+                    <img src="https://img.shields.io/badge/Flask-000?style=flat-square&logo=flask&logoColor=fff" alt="Flask">
+                    <img src="https://img.shields.io/badge/Django-%23092E20.svg?style=flat-square&logo=django&logoColor=white" alt="Django">
+                    <img src="https://img.shields.io/badge/-SQLite-003B57?style=flat-square&logo=sqlite&logoColor=white" alt="SQLite">
+                    <img src="https://img.shields.io/badge/Aiogram3-2CA5E0?style=flat-square&logo=telegram&logoColor=white" alt="Aiogram3">
+                </div>
+            </div>
+
+            <div class="tech-category">
+                <h3>Frontend & Tools</h3>
+                <div class="badges">
+                    <img src="https://img.shields.io/badge/React-%2320232a.svg?style=flat-square&logo=react&logoColor=%2361DAFB" alt="React">
+                    <img src="https://img.shields.io/badge/Svelte-%23f1413d.svg?style=flat-square&logo=svelte&logoColor=white" alt="Svelte">
+                    <img src="https://img.shields.io/badge/shadcn%2Fui-000?style=flat-square&logo=shadcnui&logoColor=fff" alt="shadcn/ui">
+                    <img src="https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=black" alt="Linux">
+                    <img src="https://img.shields.io/badge/Arch_Linux-1793D1?style=flat-square&logo=arch-linux&logoColor=white" alt="Arch Linux">
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>📊 GitHub Statistics</h2>
+            <div class="stats-container">
+                <img src="https://metrics.lecoq.io/SteppingCode?template=classic&base=header,repositories&config_timezone=Europe%2FAmsterdam" alt="GitHub Metrics" style="width: 100%; max-width: 450px;">
+                
+                <img src="https://streak-stats.demolab.com?user=SteppingCode&theme=nord&hide_border=true&background=151C2C&ring=38BDF8&fire=38BDF8&currStreakNum=F8FAFC&sideNums=F8FAFC&currStreakLabel=94A3B8&sideLabels=94A3B8&dates=94A3B8" alt="GitHub Streak" style="width: 100%; max-width: 450px;">
+            </div>
+        </section>
+
+        <section>
+            <h2>🎯 Featured Projects</h2>
+            <div class="projects-grid">
+                
+                <a href="https://github.com/SteppingCode/travel-helper" target="_blank" class="project-card">
+                    <h3>🌍 Travel Helper</h3>
+                    <p>A comprehensive web application for planning and managing travel adventures.</p>
+                    <div class="project-features">
+                        <ul>
+                            <li><strong>Features:</strong> Trip planning, budget tracking, attraction discovery</li>
+                            <li><strong>Highlights:</strong> JWT auth, responsive design, image processing</li>
+                        </ul>
+                    </div>
+                    <div class="project-tech">FastAPI • SQLite • JavaScript • HTML/CSS</div>
+                </a>
+
+                <a href="https://github.com/SteppingCode/itcube-assistant" target="_blank" class="project-card">
+                    <h3>🤖 IT-Cube Assistant</h3>
+                    <p>Simple telegram bot for signing up for IT Cube activities and events.</p>
+                    <div class="project-features">
+                        <ul>
+                            <li><strong>Features:</strong> Modular structure, user management</li>
+                            <li><strong>Highlights:</strong> Web page to view users, 1st place project</li>
+                        </ul>
+                    </div>
+                    <div class="project-tech">Python • SQLite • Aiogram3</div>
+                </a>
+
+                <a href="https://github.com/SteppingCode/vtb-analytics-public" target="_blank" class="project-card">
+                    <h3>📊 VTB Analytics</h3>
+                    <p>A public analytical dashboard for visualizing and analyzing financial data metrics.</p>
+                    <div class="project-features">
+                        <ul>
+                            <li><strong>Features:</strong> Data visualization, statistical reporting, custom filtering</li>
+                            <li><strong>Highlights:</strong> Complex chart integrations, scalable architecture</li>
+                        </ul>
+                    </div>
+                    <div class="project-tech">Python • Django • SQL • React</div>
+                </a>
+
+                <a href="https://github.com/SteppingCode/hackathon2024-frontend" target="_blank" class="project-card">
+                    <h3>🏆 Hackathon 2024 UI</h3>
+                    <p>An interactive and highly responsive frontend application developed during a 2024 hackathon.</p>
+                    <div class="project-features">
+                        <ul>
+                            <li><strong>Features:</strong> Real-time data rendering, dynamic dashboards</li>
+                            <li><strong>Highlights:</strong> Rapid UI prototyping, smooth API integration</li>
+                        </ul>
+                    </div>
+                    <div class="project-tech">React • JavaScript • CSS</div>
+                </a>
+
+                <a href="https://github.com/SteppingCode/telegram-bot" target="_blank" class="project-card">
+                    <h3>📱 Telegram Bot</h3>
+                    <p>A multifunctional Telegram bot built for task automation and quick user interactions.</p>
+                    <div class="project-features">
+                        <ul>
+                            <li><strong>Features:</strong> Async command handling, interactive menus, user management</li>
+                            <li><strong>Highlights:</strong> Modular structure, high performance with Aiogram</li>
+                        </ul>
+                    </div>
+                    <div class="project-tech">Python • Aiogram3 • SQLite</div>
+                </a>
+
+                <a href="https://github.com/chebupeka/bryansk2" target="_blank" class="project-card">
+                    <h3>🔢 Random Generator</h3>
+                    <p>Team project presented at a winter 2025 hackathon.</p>
+                    <div class="project-features">
+                        <ul>
+                            <li><strong>Features:</strong> Graphs, Validating results</li>
+                            <li><strong>Highlights:</strong> Modern minimalist design</li>
+                        </ul>
+                    </div>
+                    <div class="project-tech">Python • Svelte • FastAPI</div>
+                </a>
+
+            </div>
+        </section>
+
+        <section>
+            <h2>💼 Current Focus & Goals</h2>
+            <div class="about-grid">
+                <ul>
+                    <li>🚀 Mastering advanced FastAPI patterns and microservices architecture</li>
+                    <li>🔨 Building robust backend systems and responsive interfaces</li>
+                    <li>🌐 Improving system design, custom domain routing, and architecture skills</li>
+                    <li>💡 Planning to build 1-2 production-grade applications in 2026</li>
+                    <li>📱 Exploring mobile development opportunities</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>🎓 Learning Path</h2>
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-dot dot-red"></div>
+                    <div class="terminal-dot dot-yellow"></div>
+                    <div class="terminal-dot dot-green"></div>
+                </div>
+                <div class="terminal-body">
+<pre>
+<span class="dir">~/skills/backend</span>
+├── Python & FastAPI <span class="check">[✓]</span>
+├── Database Design <span class="check">[✓]</span>
+├── API Development <span class="check">[✓]</span>
+└── Authentication & Security <span class="load">[🔄]</span>
+
+<span class="dir">~/skills/frontend</span>
+├── HTML/CSS <span class="check">[✓]</span>
+├── JavaScript <span class="check">[✓]</span>
+└── Modern Frameworks <span class="load">[🔄]</span>
+
+<span class="dir">~/skills/devops</span>
+├── Git & GitHub <span class="check">[✓]</span>
+├── Docker <span class="load">[🔄]</span>
+└── Cloud Platforms <span class="wait">[⏳]</span>
+</pre>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>💡 Fun Facts</h2>
+            <div class="about-grid">
+                <ul>
+                    <li>⚡ I debug faster with good coffee ☕</li>
+                    <li>🐧 I use Arch btw (with Hyprland)</li>
+                    <li>🎵 I code better with music 🎧</li>
+                    <li>📖 I believe in clean code and documentation</li>
+                    <li>🎯 Focused on creating value through code</li>
+                </ul>
+            </div>
+        </section>
+
+        <footer>
+            <div class="quote">✨ "Code is poetry written for machines, but it's read by humans." ✨</div>
+            <p style="margin-bottom: 1.5rem;"><strong>Feel free to reach out!</strong> I love connecting with fellow developers and discussing interesting projects.</p>
+            <img src="https://komarev.com/ghpvc/?username=SteppingCode&color=38BDF8&style=flat-square" alt="Profile Views">
+        </footer>
+    </div>
+
     
-    <h3><strong>Languages</strong></h3>
-    <div class="badges">
-        <img src="https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python">
-        <img src="https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=000" alt="JavaScript">
-        <img src="https://img.shields.io/badge/-SQL-336791?style=flat-square&logo=postgresql&logoColor=white" alt="SQL">
-        <img src="https://img.shields.io/badge/HTML-%23E34F26.svg?logo=html5&logoColor=white" alt="HTML">
-        <img src="https://img.shields.io/badge/CSS-639?logo=css&logoColor=fff" alt="CSS">
-        <img src="https://img.shields.io/badge/C++-%2300599C.svg?logo=c%2B%2B&logoColor=white" alt="C++">
+    <div class="container" id="content-ru">
+        <header class="hero">
+            <h1>Всем привет! <span>👋</span> Я Евгений</h1>
+            <a href="https://github.com/SteppingCode">
+                <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=38BDF8&width=600&lines=Full-Stack+%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%87%D0%B8%D0%BA;Python+%D0%AD%D0%BD%D1%82%D1%83%D0%B7%D0%B8%D0%B0%D1%81%D1%82;%D0%AD%D0%BA%D1%81%D0%BF%D0%B5%D1%80%D1%82+%D0%BF%D0%BE+%D0%B2%D0%B5%D0%B1-%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F%D0%BC;%D0%92%D1%81%D0%B5%D0%B3%D0%B4%D0%B0+%D0%B8%D0%B7%D1%83%D1%87%D0%B0%D1%8E+%D1%87%D1%82%D0%BE-%D1%82%D0%BE+%D0%BD%D0%BE%D0%B2%D0%BE%D0%B5" alt="Typing SVG" />
+            </a>
+            <div class="social-links">
+                <a href="https://github.com/SteppingCode" target="_blank">
+                    <img src="https://img.shields.io/badge/-GitHub-181717?style=for-the-badge&logo=github" alt="GitHub">
+                </a>
+                <a href="mailto:steppingcode.github@gmail.com">
+                    <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail">
+                </a>
+            </div>
+        </header>
+
+        <section>
+            <h2>💫 Обо мне</h2>
+            <div class="about-grid">
+                <p>Я увлеченный full-stack разработчик с глубоким интересом к созданию масштабируемых и удобных веб-приложений. Мне нравится воплощать идеи в реальность с помощью чистого, эффективного кода и современных технологий.</p>
+                <ul>
+                    <li>🎯 <strong>В настоящее время фокусируюсь на:</strong> Веб-разработке на Python и JavaScript</li>
+                    <li>🚀 <strong>Увлекаюсь:</strong> Созданием интуитивно понятных пользовательских интерфейсов и надежных бэкенд-систем</li>
+                    <li>📚 <strong>Постоянно изучаю:</strong> Новые фреймворки, паттерны проектирования и лучшие практики</li>
+                    <li>💬 <strong>Спросите меня о:</strong> Python, FastAPI, веб-разработке, проектировании баз данных</li>
+                    <li>🌱 <strong>Развиваю навыки в:</strong> Full-stack разработке, системной архитектуре и UX</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>🛠️ Стек технологий</h2>
+            
+            <div class="tech-category">
+                <h3>Языки</h3>
+                <div class="badges">
+                    <img src="https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python">
+                    <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=000" alt="JavaScript">
+                    <img src="https://img.shields.io/badge/-SQL-336791?style=flat-square&logo=postgresql&logoColor=white" alt="SQL">
+                    <img src="https://img.shields.io/badge/HTML-%23E34F26.svg?style=flat-square&logo=html5&logoColor=white" alt="HTML">
+                    <img src="https://img.shields.io/badge/CSS-639?style=flat-square&logo=css&logoColor=fff" alt="CSS">
+                    <img src="https://img.shields.io/badge/C++-%2300599C.svg?style=flat-square&logo=c%2B%2B&logoColor=white" alt="C++">
+                </div>
+            </div>
+
+            <div class="tech-category">
+                <h3>Бэкенд и фреймворки</h3>
+                <div class="badges">
+                    <img src="https://img.shields.io/badge/FastAPI-009485.svg?style=flat-square&logo=fastapi&logoColor=white" alt="FastAPI">
+                    <img src="https://img.shields.io/badge/Flask-000?style=flat-square&logo=flask&logoColor=fff" alt="Flask">
+                    <img src="https://img.shields.io/badge/Django-%23092E20.svg?style=flat-square&logo=django&logoColor=white" alt="Django">
+                    <img src="https://img.shields.io/badge/-SQLite-003B57?style=flat-square&logo=sqlite&logoColor=white" alt="SQLite">
+                    <img src="https://img.shields.io/badge/Aiogram3-2CA5E0?style=flat-square&logo=telegram&logoColor=white" alt="Aiogram3">
+                </div>
+            </div>
+
+            <div class="tech-category">
+                <h3>Фронтенд и инструменты</h3>
+                <div class="badges">
+                    <img src="https://img.shields.io/badge/React-%2320232a.svg?style=flat-square&logo=react&logoColor=%2361DAFB" alt="React">
+                    <img src="https://img.shields.io/badge/Svelte-%23f1413d.svg?style=flat-square&logo=svelte&logoColor=white" alt="Svelte">
+                    <img src="https://img.shields.io/badge/shadcn%2Fui-000?style=flat-square&logo=shadcnui&logoColor=fff" alt="shadcn/ui">
+                    <img src="https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=black" alt="Linux">
+                    <img src="https://img.shields.io/badge/Arch_Linux-1793D1?style=flat-square&logo=arch-linux&logoColor=white" alt="Arch Linux">
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>📊 Статистика GitHub</h2>
+            <div class="stats-container">
+                <img src="https://metrics.lecoq.io/SteppingCode?template=classic&base=header,repositories&config_timezone=Europe%2FAmsterdam" alt="GitHub Metrics" style="width: 100%; max-width: 450px;">
+                
+                <img src="https://streak-stats.demolab.com?user=SteppingCode&theme=nord&hide_border=true&background=151C2C&ring=38BDF8&fire=38BDF8&currStreakNum=F8FAFC&sideNums=F8FAFC&currStreakLabel=94A3B8&sideLabels=94A3B8&dates=94A3B8" alt="GitHub Streak" style="width: 100%; max-width: 450px;">
+            </div>
+        </section>
+
+        <section>
+            <h2>🎯 Избранные проекты</h2>
+            <div class="projects-grid">
+                
+                <a href="https://github.com/SteppingCode/travel-helper" target="_blank" class="project-card">
+                    <h3>🌍 Travel Helper</h3>
+                    <p>Комплексное веб-приложение для планирования путешествий и управления ими.</p>
+                    <div class="project-features">
+                        <ul>
+                            <li><strong>Функции:</strong> Планирование поездок, отслеживание бюджета, поиск достопримечательностей</li>
+                            <li><strong>Особенности:</strong> JWT авторизация, адаптивный дизайн, обработка изображений</li>
+                        </ul>
+                    </div>
+                    <div class="project-tech">FastAPI • SQLite • JavaScript • HTML/CSS</div>
+                </a>
+
+                <a href="https://github.com/SteppingCode/itcube-assistant" target="_blank" class="project-card">
+                    <h3>🤖 IT-Cube Assistant</h3>
+                    <p>Простой Telegram-бот для записи на мероприятия и занятия IT-Cube.</p>
+                    <div class="project-features">
+                        <ul>
+                            <li><strong>Функции:</strong> Модульная структура, управление пользователями</li>
+                            <li><strong>Особенности:</strong> Веб-страница для просмотра пользователей, 1-е место на конкурсе</li>
+                        </ul>
+                    </div>
+                    <div class="project-tech">Python • SQLite • Aiogram3</div>
+                </a>
+
+                <a href="https://github.com/SteppingCode/vtb-analytics-public" target="_blank" class="project-card">
+                    <h3>📊 VTB Analytics</h3>
+                    <p>Публичный аналитический дашборд для визуализации и анализа финансовых метрик.</p>
+                    <div class="project-features">
+                        <ul>
+                            <li><strong>Функции:</strong> Визуализация данных, статистические отчеты, кастомные фильтры</li>
+                            <li><strong>Особенности:</strong> Сложные интеграции графиков, масштабируемая архитектура</li>
+                        </ul>
+                    </div>
+                    <div class="project-tech">Python • Django • SQL • React</div>
+                </a>
+
+                <a href="https://github.com/SteppingCode/hackathon2024-frontend" target="_blank" class="project-card">
+                    <h3>🏆 Hackathon 2024 UI</h3>
+                    <p>Интерактивное и адаптивное frontend-приложение, разработанное на хакатоне в 2024 году.</p>
+                    <div class="project-features">
+                        <ul>
+                            <li><strong>Функции:</strong> Рендеринг данных в реальном времени, динамические дашборды</li>
+                            <li><strong>Особенности:</strong> Быстрое прототипирование UI, плавная интеграция с API</li>
+                        </ul>
+                    </div>
+                    <div class="project-tech">React • JavaScript • CSS</div>
+                </a>
+
+                <a href="https://github.com/SteppingCode/telegram-bot" target="_blank" class="project-card">
+                    <h3>📱 Telegram Bot</h3>
+                    <p>Многофункциональный Telegram-бот для автоматизации задач и быстрого взаимодействия с пользователями.</p>
+                    <div class="project-features">
+                        <ul>
+                            <li><strong>Функции:</strong> Асинхронная обработка команд, интерактивные меню, управление пользователями</li>
+                            <li><strong>Особенности:</strong> Модульная структура, высокая производительность благодаря Aiogram</li>
+                        </ul>
+                    </div>
+                    <div class="project-tech">Python • Aiogram3 • SQLite</div>
+                </a>
+
+                <a href="https://github.com/chebupeka/bryansk2" target="_blank" class="project-card">
+                    <h3>🔢 Random Generator</h3>
+                    <p>Командный проект, представленный на зимнем хакатоне 2025 года.</p>
+                    <div class="project-features">
+                        <ul>
+                            <li><strong>Функции:</strong> Графики, валидация результатов</li>
+                            <li><strong>Особенности:</strong> Современный минималистичный дизайн</li>
+                        </ul>
+                    </div>
+                    <div class="project-tech">Python • Svelte • FastAPI</div>
+                </a>
+
+            </div>
+        </section>
+
+        <section>
+            <h2>💼 Текущие цели и фокус</h2>
+            <div class="about-grid">
+                <ul>
+                    <li>🚀 Освоение продвинутых паттернов FastAPI и микросервисной архитектуры</li>
+                    <li>🔨 Создание надежных бэкенд-систем и адаптивных интерфейсов</li>
+                    <li>🌐 Улучшение навыков системного дизайна, маршрутизации кастомных доменов и архитектуры</li>
+                    <li>💡 Планирую создать 1-2 production-grade приложения в 2026 году</li>
+                    <li>📱 Изучение возможностей в сфере мобильной разработки</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>🎓 Путь обучения</h2>
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-dot dot-red"></div>
+                    <div class="terminal-dot dot-yellow"></div>
+                    <div class="terminal-dot dot-green"></div>
+                </div>
+                <div class="terminal-body">
+<pre>
+<span class="dir">~/skills/backend</span>
+├── Python & FastAPI <span class="check">[✓]</span>
+├── Проектирование БД <span class="check">[✓]</span>
+├── Разработка API <span class="check">[✓]</span>
+└── Аутентификация и безопасность <span class="load">[🔄]</span>
+
+<span class="dir">~/skills/frontend</span>
+├── HTML/CSS <span class="check">[✓]</span>
+├── JavaScript <span class="check">[✓]</span>
+└── Современные фреймворки <span class="load">[🔄]</span>
+
+<span class="dir">~/skills/devops</span>
+├── Git & GitHub <span class="check">[✓]</span>
+├── Docker <span class="load">[🔄]</span>
+└── Облачные платформы <span class="wait">[⏳]</span>
+</pre>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>💡 Интересные факты</h2>
+            <div class="about-grid">
+                <ul>
+                    <li>⚡ Я дебажу быстрее с хорошим кофе ☕</li>
+                    <li>🐧 I use Arch btw (с Hyprland)</li>
+                    <li>🎵 Я пишу код лучше под музыку 🎧</li>
+                    <li>📖 Верю в чистый код и хорошую документацию</li>
+                    <li>🎯 Нацелен на создание ценности с помощью кода</li>
+                </ul>
+            </div>
+        </section>
+
+        <footer>
+            <div class="quote">✨ "Код — это поэзия, написанная для машин, но читаемая людьми." ✨</div>
+            <p style="margin-bottom: 1.5rem;"><strong>Не стесняйтесь писать мне!</strong> Я всегда рад общению с другими разработчиками и обсуждению интересных проектов.</p>
+            <img src="https://komarev.com/ghpvc/?username=SteppingCode&color=38BDF8&style=flat-square" alt="Просмотры профиля">
+        </footer>
     </div>
 
-    <h3><strong>Backend & Frameworks</strong></h3>
-    <div class="badges">
-        <img src="https://img.shields.io/badge/FastAPI-009485.svg?logo=fastapi&logoColor=white" alt="FastAPI">
-        <img src="https://img.shields.io/badge/Flask-000?logo=flask&logoColor=fff" alt="Flask">
-        <img src="https://img.shields.io/badge/-SQLite-003B57?style=flat-square&logo=sqlite&logoColor=white" alt="SQLite">
-        <img src="https://img.shields.io/badge/Aiogram3-2CA5E0?logo=telegram&logoColor=white" alt="Aiogram3">
-        <img src="https://img.shields.io/badge/Django-%23092E20.svg?logo=django&logoColor=white" alt="Django">
-        <img src="https://img.shields.io/badge/React-%2320232a.svg?logo=react&logoColor=%2361DAFB" alt="React">
-        <img src="https://img.shields.io/badge/shadcn%2Fui-000?logo=shadcnui&logoColor=fff" alt="shadcn/ui">
-        <img src="https://img.shields.io/badge/Svelte-%23f1413d.svg?logo=svelte&logoColor=white" alt="Svelte">
-    </div>
-
-    <hr>
-
-    <h2>📊 GitHub Statistics</h2>
-    <div class="center stats">
-        <img height="180" src="https://github-readme-stats.vercel.app/api?username=SteppingCode&show_icons=true&theme=radical&include_all_commits=true&count_private=true" alt="GitHub Stats">
-        <img height="180" src="https://github-readme-stats.vercel.app/api/top-langs/?username=SteppingCode&layout=compact&langs_count=7&theme=radical" alt="Top Languages">
-    </div>
-
-    <hr>
-
-    <h2>🎯 Featured Projects</h2>
-    <div class="projects-grid">
-        <div class="project-card">
-            <h3>✍️ <a href="https://github.com/SteppingCode/myblogsite" target="_blank">My first web app</a></h3>
-            <p>Personal blog website.</p>
-            <p><strong>Tech Stack</strong>: Python, Flask, SQLite</p>
-            <p><strong>Features</strong>: Registration, comments, reactions, view posts</p>
-            <p><strong>Highlights</strong>: Pretty design, profile customization</p>
-        </div>
-
-        <div class="project-card">
-            <h3>🌍 <a href="https://github.com/SteppingCode/travel-helper" target="_blank">Travel Helper</a></h3>
-            <p>A comprehensive web application for planning and managing travel adventures.</p>
-            <p><strong>Tech Stack</strong>: FastAPI, SQLite, JavaScript, HTML/CSS</p>
-            <p><strong>Features</strong>: Trip planning, budget tracking, attraction discovery, photo management, checklists</p>
-            <p><strong>Highlights</strong>: JWT authentication, responsive design, image processing</p>
-        </div>
-
-        <div class="project-card">
-            <h3>🤖 <a href="https://github.com/SteppingCode/itcube-assistant" target="_blank">IT-Cube Assistant</a></h3>
-            <p>Simple telegram bot for signing up for IT Cube.</p>
-            <p><strong>Tech Stack</strong>: Python, SQLite, Aiogram</p>
-            <p><strong>Features</strong>: Module structure</p>
-            <p><strong>Highlights</strong>: Web page to view users, 1-st place project</p>
-        </div>
-
-        <div class="project-card">
-            <h3>🔢 <a href="https://github.com/chebupeka/bryansk2" target="_blank">Random number generator</a></h3>
-            <p>The team project was presented at a hackathon in winter 2025.</p>
-            <p><strong>Tech Stack</strong>: Svelte, FastAPI</p>
-            <p><strong>Features</strong>: Graphs, Validating results</p>
-            <p><strong>Highlights</strong>: Modern minimalist design</p>
-        </div>
-    </div>
-
-    <hr>
-
-    <h2>💼 What I'm Working On</h2>
-    <ul>
-        <li>🔨 Building robust backend systems with FastAPI</li>
-        <li>🎨 Creating responsive, user-friendly interfaces</li>
-        <li>📖 Contributing to open-source projects</li>
-        <li>🧠 Deepening knowledge of software architecture and design patterns</li>
-    </ul>
-
-    <hr>
-
-    <h2>🤝 Let's Connect!</h2>
-    <div class="center badges">
-        <a href="https://github.com/SteppingCode" target="_blank">
-            <img src="https://img.shields.io/badge/-GitHub-181717?style=for-the-badge&logo=github" alt="GitHub">
-        </a>
-        <a href="mailto:steppingcode.github@gmail.com">
-            <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail">
-        </a>
-    </div>
-
-    <hr>
-
-    <h2>📈 Goals for 2026</h2>
-    <ul>
-        <li>🚀 Master advanced FastAPI patterns and microservices architecture</li>
-        <li>🎓 Contribute more to open-source communities</li>
-        <li>💡 Build 1-2 production-grade applications</li>
-        <li>📱 Explore mobile development opportunities</li>
-        <li>🌐 Improve system design and architecture skills</li>
-    </ul>
-
-    <hr>
-
-    <h2>🎓 Learning Path</h2>
-<pre><code>Backend Development
-    ├── Python & FastAPI ✓
-    ├── Database Design ✓
-    ├── API Development ✓
-    └── Authentication & Security 🔄
-
-Frontend Development
-    ├── HTML/CSS ✓
-    ├── JavaScript ✓
-    └── Modern Frameworks 🔄
-
-DevOps & Deployment
-    ├── Git & GitHub ✓
-    ├── Docker 🔄
-    └── Cloud Platforms ⏳
-</code></pre>
-
-    <hr>
-
-    <h2>💡 Fun Facts</h2>
-    <ul>
-        <li>⚡ I debug faster with good coffee ☕</li>
-        <li>🎵 I code better with music 🎧</li>
-        <li>📖 I believe in clean code and documentation</li>
-        <li>🌱 Always excited about learning new technologies</li>
-        <li>🎯 Focused on creating value through code</li>
-    </ul>
-
-    <hr>
-
-    <div class="center">
-        <h3>✨ "Code is poetry written for machines, but it's read by humans." ✨</h3>
-        <p><strong>Feel free to reach out!</strong> I love connecting with fellow developers and discussing interesting projects.</p>
-        <img src="https://komarev.com/ghpvc/?username=SteppingCode&color=blueviolet" alt="Profile Views">
-    </div>
+    <script>
+        function toggleLang() {
+            const ru = document.getElementById('content-ru');
+            const en = document.getElementById('content-en');
+            
+            if (ru.style.display === 'none') {
+                ru.style.display = 'block';
+                en.style.display = 'none';
+            } else {
+                ru.style.display = 'none';
+                en.style.display = 'block';
+            }
+        }
+    </script>
 
 </body>
 </html>
